@@ -18,9 +18,9 @@ export const Patients = () => {
 
     return (
         <div>
-            <h1 className="text-xl mb-2">Patients</h1>
+            <h1 className="text-4xl mb-5">Patients</h1>
 
-            <Table className="md:hidden">
+            <Table className="">
                 <Thead>
                     <tr className="whitespace-nowrap">
                         <th className="p-3 text-lg tracking-wider text-left">ID</th>

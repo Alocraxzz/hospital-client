@@ -17,11 +17,11 @@ export const Doctors = () => {
 
     return (
         <div>
-            <h1 className="text-xl mb-2">Doctors</h1>
+            <h1 className="text-4xl mb-5">Doctors</h1>
 
             <Table>
                 <Thead>
-                    <tr>
+                    <tr className="whitespace-nowrap">
                         <th className="p-3 text-lg tracking-wider text-left">ID</th>
                         <th className="p-3 text-lg tracking-wider text-left">Name</th>
                         <th className="p-3 text-lg tracking-wider text-left">Surname</th>
@@ -32,13 +32,13 @@ export const Doctors = () => {
                 </Thead>
                 <Tbody>
                     {doctors.map((doctor) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800" key={doctor.id}>
+                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={doctor.id}>
                             <td className="p-3 text-lg">{doctor.id}</td>
                             <td className="p-3 text-lg">{doctor.name}</td>
                             <td className="p-3 text-lg">{doctor.surname}</td>
                             <td className="p-3 text-lg">{doctor.speciality}</td>
                             <td className="p-3 text-lg">{doctor.phoneNumber}</td>
-                            <td>
+                            <td className="p-3">
                                 <div className="inline-flex">
                                     <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
                                         View

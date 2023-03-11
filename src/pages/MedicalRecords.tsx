@@ -18,11 +18,11 @@ export const MedicalRecords = () => {
 
     return (
         <div>
-            <h1 className="text-xl mb-2">Patients</h1>
+            <h1 className="text-4xl mb-5">Medical records</h1>
 
             <Table>
                 <Thead>
-                    <tr>
+                    <tr className="whitespace-nowrap">
                         <th className="p-3 text-lg tracking-wider text-left">ID</th>
                         <th className="p-3 text-lg tracking-wider text-left">Patient id</th>
                         <th className="p-3 text-lg tracking-wider text-left">Doctor id</th>
@@ -34,14 +34,14 @@ export const MedicalRecords = () => {
                 </Thead>
                 <Tbody>
                     {medicalRecords.map((medicalRecord) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800" key={medicalRecord.id}>
+                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={medicalRecord.id}>
                             <td className="p-3 text-lg">{medicalRecord.id}</td>
                             <td className="p-3 text-lg">{medicalRecord.patientId}</td>
                             <td className="p-3 text-lg">{medicalRecord.doctorId}</td>
                             <td className="p-3 text-lg">{medicalRecord.date?.toLocaleString()}</td>
                             <td className="p-3 text-lg">{medicalRecord.diagnosis}</td>
                             <td className="p-3 text-lg">{medicalRecord.prescription}</td>
-                            <td>
+                            <td className="p-3">
                                 <div className="inline-flex">
                                     <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
                                         <Link to="patients">View</Link>
