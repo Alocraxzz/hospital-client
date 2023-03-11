@@ -11,7 +11,7 @@ export const Thead: FC<TableProps> = ({ children }) => {
             {children}
         </thead>
     );
-};
+}
 
 export const Tbody: FC<TableProps> = ({ children }) => {
     return (
@@ -21,7 +21,7 @@ export const Tbody: FC<TableProps> = ({ children }) => {
     );
 };
 
-export const Table: FC<TableProps | any> = ({ children, ...props}) => {
+export const Table: FC<TableProps | any> = ({ children, ...props }) => {
     return (
         <div {...props}>
             <div className="overflow-auto rounded-lg shadow">

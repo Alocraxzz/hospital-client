@@ -7,11 +7,12 @@ interface IAppointmentProps {
 }
 
 const fields = [
-    { name: "ID", value: "id" },
-    { name: "Patient id", value: "patientId" },
-    { name: "Doctor id", value: "doctorId" },
-    { name: "Date", value: "date" },
-    { name: "Reason", value: "reason" },
+    { name: "ID" },
+    { name: "Patient id" },
+    { name: "Doctor id" },
+    { name: "Date" },
+    { name: "Reason" },
+    { name: "Actions" },
 ];
 
 export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
@@ -19,8 +20,8 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
         <Table>
             <Thead>
                 <tr className="whitespace-nowrap">
-                    {fields.map((field) => 
-                        <th className="p-3 text-lg tracking-wider text-left">{field.name}</th>
+                    {fields.map((field, index) =>
+                        <th key={index} className="p-3 text-lg tracking-wider text-left">{field.name}</th>
                     )}
                 </tr>
             </Thead>
@@ -51,7 +52,7 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
                 ) : (
                     <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap">
                         <td className="text-center p-3 text-lg" colSpan={fields.length}>
-                            Nothing was found   
+                            Nothing was found
                         </td>
                     </tr>
                 )}

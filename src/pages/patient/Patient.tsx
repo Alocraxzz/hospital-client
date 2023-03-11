@@ -7,23 +7,23 @@ import { IPatient } from "../../types/IPatient";
 export const Patient = () => {
     const { id } = useParams<{ id: string }>();
     const [patient, setPatient] = useState<IPatient | null>(null);
-    
+
     useEffect(() => {
         const fetchPatient = async () => {
             const patient = await PatientService.getOne(Number(id));
-            console.log(patient);
+
             patient && setPatient(patient);
         }
         fetchPatient();
     }, []);
 
     return (
-        <>
+        <div>
             {patient ? (
-                <PatientInfoCard patient={patient}/>
+                <PatientInfoCard patient={patient} />
             ) : (
                 <>Nothing was found</>
             )}
-        </>
+        </div>
     );
 };

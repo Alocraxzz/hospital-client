@@ -11,7 +11,7 @@ export const Appointments = () => {
         const fetchAppointments = async () => {
             const appointments = await AppointmentService.getAll();
 
-            // appointments && setAppointments(appointments);
+            appointments && setAppointments(appointments);
         }
         fetchAppointments();
     }, []);

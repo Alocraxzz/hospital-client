@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MedicalRecordService } from "../api/MedicalRecordService";
+import { MedicalRecordsTable } from "../components/table/medicalRecordsTable/MedicalRecordsTable";
 import { Table, Tbody, Thead } from "../components/table/Table";
 import { IMedicalRecord } from "../types/IMedicalRecord";
 
@@ -20,44 +21,7 @@ export const MedicalRecords = () => {
         <div>
             <h1 className="text-4xl mb-5">Medical records</h1>
 
-            <Table>
-                <Thead>
-                    <tr className="whitespace-nowrap">
-                        <th className="p-3 text-lg tracking-wider text-left">ID</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Patient id</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Doctor id</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Date</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Diagnosis</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Prescription</th>
-                        <th className="p-3 text-lg tracking-wider text-left">Actions</th>
-                    </tr>
-                </Thead>
-                <Tbody>
-                    {medicalRecords.map((medicalRecord) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={medicalRecord.id}>
-                            <td className="p-3 text-lg">{medicalRecord.id}</td>
-                            <td className="p-3 text-lg">{medicalRecord.patientId}</td>
-                            <td className="p-3 text-lg">{medicalRecord.doctorId}</td>
-                            <td className="p-3 text-lg">{medicalRecord.date?.toLocaleString()}</td>
-                            <td className="p-3 text-lg">{medicalRecord.diagnosis}</td>
-                            <td className="p-3 text-lg">{medicalRecord.prescription}</td>
-                            <td className="p-3">
-                                <div className="inline-flex">
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
-                                        <Link to="patients">View</Link>
-                                    </button>
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
-                                        Edit
-                                    </button>
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
-                                        Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
-                </Tbody>
-            </Table>
+            <MedicalRecordsTable medicalRecords={medicalRecords} />
         </div>
     );
 };
