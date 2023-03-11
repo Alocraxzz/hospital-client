@@ -1,23 +1,22 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { IMedicalRecord } from "../../../types/IMedicalRecord";
+import { IPatient } from "../../../types/IPatient";
 import { Table, Tbody, Thead } from "../Table";
 
-interface MedicalRecordsProps {
-    medicalRecords: IMedicalRecord[];
+interface IPatientsTableProps {
+    patients: IPatient[];
 }
 
 const fields = [
-    { name: "Id", key: "id" },
-    { name: "Patient id", key: "patientId" },
-    { name: "Doctor id", key: "doctorId" },
-    { name: "Date", key: "date" },
-    { name: "Diagnosis", key: "diagnosis" },
-    { name: "Prescription", key: "prescription" },
+    { name: "ID", key: "id" },
+    { name: "Name", key: "name" },
+    { name: "Surname", key: "surname" },
+    { name: "Date of birth", key: "dateOfBirth" },
+    { name: "Phone number", key: "phoneNumber" },
     { name: "Actions", key: "actions" },
 ]
 
-export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords }) => {
+export const PatientsTable: FC<IPatientsTableProps> = ({ patients }) => {
     return (
         <Table>
             <Thead>
@@ -28,28 +27,27 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords })
                 </tr>
             </Thead>
             <Tbody>
-                {medicalRecords.length > 0 ? (
-                    medicalRecords.map((medicalRecord) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={medicalRecord.id}>
-                            <td className="p-3 text-md">{medicalRecord.id}</td>
-                            <td className="p-3 text-md">{medicalRecord.patientId}</td>
-                            <td className="p-3 text-md">{medicalRecord.doctorId}</td>
-                            <td className="p-3 text-md">{medicalRecord.date?.toLocaleString()}</td>
-                            <td className="p-3 text-md">{medicalRecord.diagnosis}</td>
-                            <td className="p-3 text-md">{medicalRecord.prescription}</td>
+                {patients.length > 0 ? (
+                    patients.map((patient) => (
+                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={patient.id}>
+                            <td className="p-3 text-md">{patient.id}</td>
+                            <td className="p-3 text-md">{patient.name}</td>
+                            <td className="p-3 text-md">{patient.surname}</td>
+                            <td className="p-3 text-md">{patient.dateOfBirth?.toLocaleString()}</td>
+                            <td className="p-3 text-md">{patient.phoneNumber}</td>
                             <td className="p-3">
                                 <div className="inline-flex">
-                                    <Link to={`/medical-records/${medicalRecord.id}`}>
+                                    <Link to={`/patients/${patient.id}`}>
                                         <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
-                                    <Link to={`/medical-records/${medicalRecord.id}/edit`}>
+                                    <Link to={`/patients/${patient.id}/edit`}>
                                         <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
-                                    <Link to={`/medical-records/${medicalRecord.id}/delete`}>
+                                    <Link to={`/patients/${patient.id}/delete`}>
                                         <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
                                             Delete
                                         </button>

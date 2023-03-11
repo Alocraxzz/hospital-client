@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PatientService } from "../../api/PatientService";
-import PatientInfoCard from "../../components/patient/PatientInfoCard";
+import { PatientInfoCard } from "../../components/card/patient/PatientInfoCard";
 import { IPatient } from "../../types/IPatient";
 
 export const Patient = () => {
@@ -20,7 +20,7 @@ export const Patient = () => {
     return (
         <div>
             {patient ? (
-                <PatientInfoCard patient={patient} />
+                <PatientInfoCard patient={patient} printAdditionalTables={true} />
             ) : (
                 <>Nothing was found</>
             )}

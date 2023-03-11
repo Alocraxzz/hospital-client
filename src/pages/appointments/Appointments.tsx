@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { AppointmentService } from "../api/AppointmentService";
-import { AppointmentsTable } from "../components/table/appointmentsTable/AppointmentsTable";
-import { Table, Tbody, Thead } from "../components/table/Table";
-import { IAppointment } from "../types/IAppointment";
+import { AppointmentService } from "../../api/AppointmentService";
+import { AppointmentsTable } from "../../components/table/appointmentsTable/AppointmentsTable";
+import { Table, Tbody, Thead } from "../../components/table/Table";
+import { Header } from "../../components/ui/Header";
+import { IAppointment } from "../../types/IAppointment";
 
 export const Appointments = () => {
     const [appointments, setAppointments] = useState<IAppointment[]>([]);
@@ -18,7 +19,7 @@ export const Appointments = () => {
 
     return (
         <div>
-            <h1 className="text-4xl mb-5">Appointments</h1>
+            <Header>Appointments</Header>
 
             <AppointmentsTable appointments={appointments}/>
         </div>

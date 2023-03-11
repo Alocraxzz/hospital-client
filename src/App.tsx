@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react'
-import { PatientService } from './api/PatientService';
-import { IPatient } from './types/IPatient';
+import { Header } from './components/ui/Header';
 
 function App() {
     return (
-        <>
-            Home page
-        </>
+        <Header>Home page</Header>
     )
 }
 

@@ -43,13 +43,9 @@ export const Navbar: React.FC = () => {
                         </button>
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
-                        <div className="flex-shrink-0">
+                        <div className="flex-shrink-0 items-center">
                             <Link to="/">
-                                <img
-                                    className="block h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                                    alt="Workflow"
-                                />
+                                <span className="text-2xl text-bold">Hospital</span>
                             </Link>
                         </div>
                         <div className="hidden sm:block sm:ml-6">
@@ -58,7 +54,7 @@ export const Navbar: React.FC = () => {
                                     <Link
                                         key={item.label}
                                         to={item.path}
-                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-md font-medium"
                                     >
                                         {item.label}
                                     </Link>

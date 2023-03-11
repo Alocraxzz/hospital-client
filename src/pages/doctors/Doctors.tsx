@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { DoctorService } from "../api/DoctorService";
-import { Table, Tbody, Thead } from "../components/table/Table";
-import { IDoctor } from "../types/IDoctor";
+import { Link } from "react-router-dom";
+import { DoctorService } from "../../api/DoctorService";
+import { Table, Tbody, Thead } from "../../components/table/Table";
+import { Header } from "../../components/ui/Header";
+import { IDoctor } from "../../types/IDoctor";
 
 export const Doctors = () => {
     const [doctors, setDoctors] = useState<IDoctor[]>([]);
@@ -17,7 +19,7 @@ export const Doctors = () => {
 
     return (
         <div>
-            <h1 className="text-4xl mb-5">Doctors</h1>
+            <Header>Doctors</Header>
 
             <Table>
                 <Thead>
@@ -40,15 +42,21 @@ export const Doctors = () => {
                             <td className="p-3 text-lg">{doctor.phoneNumber}</td>
                             <td className="p-3">
                                 <div className="inline-flex">
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
-                                        View
-                                    </button>
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
-                                        Edit
-                                    </button>
-                                    <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
-                                        Delete
-                                    </button>
+                                    <Link to={`/doctors/${doctor.id}`}>
+                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                            View
+                                        </button>
+                                    </Link>
+                                    <Link to={`/doctors/${doctor.id}/edit`}>
+                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
+                                            Edit
+                                        </button>
+                                    </Link>
+                                    <Link to={`/doctors/${doctor.id}/delete`}>
+                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
+                                            Delete
+                                        </button>
+                                    </Link>
                                 </div>
                             </td>
                         </tr>

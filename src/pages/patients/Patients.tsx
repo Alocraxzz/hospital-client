@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { PatientService } from "../../api/PatientService";
-import { Table, Tbody, Thead } from "../../components/table/Table";
+import { PatientsTable } from "../../components/table/patient/PatientsTable";
+import { Header } from "../../components/ui/Header";
 import { IPatient } from "../../types/IPatient";
 
 export const Patients = () => {
@@ -18,9 +18,9 @@ export const Patients = () => {
 
     return ( 
         <div>
-            <h1 className="text-4xl mb-5">Patients</h1>
+            <Header>Patients</Header>
 
-            
+            <PatientsTable patients={patients} />
         </div>
     );
 };

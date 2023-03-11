@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MedicalRecordService } from "../api/MedicalRecordService";
-import { MedicalRecordsTable } from "../components/table/medicalRecordsTable/MedicalRecordsTable";
-import { Table, Tbody, Thead } from "../components/table/Table";
-import { IMedicalRecord } from "../types/IMedicalRecord";
+import { MedicalRecordService } from "../../api/MedicalRecordService";
+import { MedicalRecordsTable } from "../../components/table/medicalRecordsTable/MedicalRecordsTable";
+import { Table, Tbody, Thead } from "../../components/table/Table";
+import { Header } from "../../components/ui/Header";
+import { IMedicalRecord } from "../../types/IMedicalRecord";
 
 export const MedicalRecords = () => {
     const [medicalRecords, setMedicalRecords] = useState<IMedicalRecord[]>([]);
@@ -19,7 +20,7 @@ export const MedicalRecords = () => {
 
     return (
         <div>
-            <h1 className="text-4xl mb-5">Medical records</h1>
+            <Header>Medical records</Header>
 
             <MedicalRecordsTable medicalRecords={medicalRecords} />
         </div>
