@@ -1,5 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { CustomModal } from "../../../CustomModal";
+import Modal from "../../../Modal";
 import { IPatient } from "../../../types/IPatient";
 import { Table, Tbody, Thead } from "../Table";
 
@@ -17,6 +19,11 @@ const fields = [
 ]
 
 export const PatientsTable: FC<IPatientsTableProps> = ({ patients }) => {
+
+    const handleModalConfirm = (id: number | undefined) => {
+        id && alert('Delete patient with id: ' + id);
+    }
+
     return (
         <Table>
             <Thead>
@@ -52,6 +59,11 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients }) => {
                                             Delete
                                         </button>
                                     </Link>
+                                    <CustomModal
+                                        title="Delete patient?"
+                                        content={`Are you sure you want to delete the patient with ID: ${patient.id}?`}
+                                        onConfirm={() => handleModalConfirm(patient.id)}
+                                    />
                                 </div>
                             </td>
                         </tr>

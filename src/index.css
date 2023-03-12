@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
 #root {
-  height: 100wh;
+  height: 100vh;
+}
+
+@media screen and (orientation: landscape) {
+
+  html,
+  body,
+  #root {
+    height: 100wh;
+  }
 }

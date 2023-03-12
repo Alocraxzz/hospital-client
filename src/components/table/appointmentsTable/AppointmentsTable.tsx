@@ -34,7 +34,7 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
                             <td className="p-3 text-md">{appointment.patientId}</td>
                             <td className="p-3 text-md">{appointment.doctorId}</td>
                             <td className="p-3 text-md">{appointment.date?.toLocaleString()}</td>
-                            <td className="p-3 text-md">{appointment.reason}</td>
+                            <td className="p-3 text-md whitespace-pre">{appointment.reason}</td>
                             <td className="p-3">
                                 <div className="inline-flex">
                                     <Link to={`/appointments/${appointment.id}`}>
