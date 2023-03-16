@@ -7,9 +7,10 @@ import { Header } from "../../ui/Header";
 interface PatientInfoCardProps {
     patient: IPatient;
     printAdditionalTables?: boolean;
+    handleUpdate?: () => void;
 }
 
-export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, printAdditionalTables }) => {
+export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, printAdditionalTables, handleUpdate }) => {
     const { id, name, surname, dateOfBirth, phoneNumber } = patient;
 
     return (
@@ -37,7 +38,7 @@ export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, print
                     <div className="my-5">
                         <Header>Patient appointments</Header>
                         {patient.appointments ? (
-                            <AppointmentsTable appointments={patient.appointments} />
+                            <AppointmentsTable appointments={patient.appointments} handleUpdate={handleUpdate} />
                         ) : (
                             <>Nothing was found</>
                         )}
@@ -45,7 +46,7 @@ export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, print
                     <div className="my-5">
                         <Header>Patient medical records</Header>
                         {patient.medicalRecords ? (
-                            <MedicalRecordsTable medicalRecords={patient.medicalRecords} />
+                            <MedicalRecordsTable medicalRecords={patient.medicalRecords} handleUpdate={handleUpdate} />
                         ) : (
                             <>Nothing was found</>
                         )}

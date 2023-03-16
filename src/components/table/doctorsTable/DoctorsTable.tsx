@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { PatientService } from "../../../api/PatientService";
-import { IPatient } from "../../../types/IPatient";
-import { CustomModal } from "../../customModal/CustomModal";
+import { DoctorService } from "../../../api/DoctorService";
+import { IDoctor } from "../../../types/IDoctor";
 import { Table, Tbody, Thead } from "../Table";
+import { CustomModal } from "../../customModal/CustomModal";
 
-interface IPatientsTableProps {
-    patients: IPatient[];
+interface IDoctorsTableProps {
+    doctors: IDoctor[];
     handleUpdate: () => void;
 }
 
@@ -14,54 +14,55 @@ const fields = [
     { name: "ID", key: "id" },
     { name: "Name", key: "name" },
     { name: "Surname", key: "surname" },
-    { name: "Date of birth", key: "dateOfBirth" },
+    { name: "Speciality", key: "speciality" },
     { name: "Phone number", key: "phoneNumber" },
     { name: "Actions", key: "actions" },
-]
+];
 
-export const PatientsTable: FC<IPatientsTableProps> = ({ patients, handleUpdate }) => {
+export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors, handleUpdate }) => {
 
     const handleModalConfirm = (id: number | undefined) => {
-        id && PatientService.delete(id);
+        id && DoctorService.delete(id);
         handleUpdate();
-    }
+    };
 
     return (
         <Table>
             <Thead>
                 <tr className="whitespace-nowrap">
                     {fields.map((field) =>
-                        <th key={field.key} className="p-3 text-md tracking-wider text-left">{field.name}</th>
+                        <th key={field.key} className="p-3 text-md tracking-wider text-left">{field.name}</th>,
                     )}
                 </tr>
             </Thead>
             <Tbody>
-                {patients.length > 0 ? (
-                    patients.map((patient) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={patient.id}>
-                            <td className="p-3 text-md">{patient.id}</td>
-                            <td className="p-3 text-md">{patient.name}</td>
-                            <td className="p-3 text-md">{patient.surname}</td>
-                            <td className="p-3 text-md">{patient.dateOfBirth?.toLocaleString()}</td>
-                            <td className="p-3 text-md">{patient.phoneNumber}</td>
+                {doctors.length > 0 ? (
+                    doctors.map((doctor) => (
+                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={doctor.id}>
+                            <td className="p-3 text-md">{doctor.id}</td>
+                            <td className="p-3 text-md">{doctor.name}</td>
+                            <td className="p-3 text-md">{doctor.surname}</td>
+                            <td className="p-3 text-md">{doctor.speciality}</td>
+                            <td className="p-3 text-md">{doctor.phoneNumber}</td>
                             <td className="p-3">
                                 <div className="inline-flex">
-                                    <Link to={`/patients/${patient.id}`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                    <Link to={`/doctors/${doctor.id}`}>
+                                        <button
+                                            className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
-                                    <Link to={`/patients/${patient.id}/edit`}>
+                                    <Link to={`/doctors/${doctor.id}/edit`}>
                                         <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
                                     <CustomModal
-                                        title="Delete patient?"
-                                        content={`Are you sure you want to delete the patient with ID: ${patient.id}?`}
+                                        title="Delete doctor?"
+                                        content={`Are you sure you want to delete the doctor with ID: ${doctor.id}?`}
                                         openButtonTitle="Delete"
                                         openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
-                                        onConfirm={() => handleModalConfirm(patient.id)}
+                                        onConfirm={() => handleModalConfirm(doctor.id)}
                                     />
                                 </div>
                             </td>

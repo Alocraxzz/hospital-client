@@ -5,6 +5,7 @@ import { Table, Tbody, Thead } from "../Table";
 
 interface MedicalRecordsProps {
     medicalRecords: IMedicalRecord[];
+    handleUpdate: () => void | undefined;
 }
 
 const fields = [
@@ -17,7 +18,7 @@ const fields = [
     { name: "Actions", key: "actions" },
 ]
 
-export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords }) => {
+export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords, handleUpdate }) => {
     return (
         <Table>
             <Thead>

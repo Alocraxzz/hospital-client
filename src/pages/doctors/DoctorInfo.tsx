@@ -4,7 +4,7 @@ import { DoctorService } from "../../api/DoctorService";
 import { DoctorInfoCard } from "../../components/card/doctor/DoctorInfoCard";
 import { IDoctor } from "../../types/IDoctor";
 
-export const Doctor = () => {
+export const DoctorInfo = () => {
     const { id } = useParams<{ id: string }>();
     const [doctor, setDoctor] = useState<IDoctor | null>(null);
 

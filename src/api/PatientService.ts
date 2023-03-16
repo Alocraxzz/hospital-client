@@ -30,9 +30,9 @@ export class PatientService extends Service {
         }
     }
 
-    static async update(patient: IPatient) {
+    static async update(id: number, patient: IPatient) {
         try {
-            const response = await axios.put<Number>(`${this.base}/patients/${patient.id}`, patient);
+            const response = await axios.put<Number>(`${this.base}/patients/${id}`, patient);
             return response.data;
         } catch (error) {
             console.log(error);

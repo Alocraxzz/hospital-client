@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useRouteError, RouteError } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
 
 interface ErrorPageProps { }
 
 export default function ErrorPage(props: ErrorPageProps): JSX.Element {
-    const error: RouteError | null = useRouteError();
+    const error: any = useRouteError();
 
     useEffect(() => {
         console.log(error);

@@ -4,32 +4,46 @@ import App from './App'
 import ErrorPage from './components/error/ErrorPage';
 import { Layout } from './components/layout/Layout';
 import './index.css'
-import { Appointment } from './pages/appointments/Appointment';
+import { Provider } from 'react-redux'
+import { AppointmentInfo } from './pages/appointments/AppointmentInfo';
 import { Appointments } from './pages/appointments/Appointments';
-import { Doctor } from './pages/doctors/Doctor';
+import { DoctorInfo } from './pages/doctors/DoctorInfo';
 import { Doctors } from './pages/doctors/Doctors';
-import { MedicalRecord } from './pages/medicalRecords/MedicalRecord';
+import { MedicalRecordInfo } from './pages/medicalRecords/MedicalRecordInfo';
 import { MedicalRecords } from './pages/medicalRecords/MedicalRecords';
-import { Patient } from './pages/patients/Patient';
+import { PatientInfo } from './pages/patients/PatientInfo';
 import { Patients } from './pages/patients/Patients';
+import { PatientCreatePage } from "./pages/patients/PatientCreatePage";
+import { PatientEditPage } from "./pages/patients/PatientEditPage";
+import { AppointmentCreatePage } from './pages/appointments/AppointmentCreatePage';
 
 const router = createBrowserRouter([
     {
         path: "/", element: <Layout />, errorElement: <ErrorPage />,
         children: [
             { path: "/", element: <App /> },
+
             { path: "/patients", element: <Patients /> },
-            { path: "/patients/:id", element: <Patient /> },
+            { path: "/patients/:id", element: <PatientInfo /> },
+            { path: "/patients/create", element: <PatientCreatePage /> },
+            { path: "/patients/:id/edit", element: <PatientEditPage /> },
+
             { path: "/doctors", element: <Doctors /> },
-            { path: "/doctors/:id", element: <Doctor /> },
+            { path: "/doctors/:id", element: <DoctorInfo /> },
+
             { path: "/appointments", element: <Appointments /> },
-            { path: "/appointments/:id", element: <Appointment /> },
+            { path: "/appointments/:id", element: <AppointmentInfo /> },
+            { path: "/appointments/create", element: <AppointmentCreatePage /> },
+
             { path: "/medical-records", element: <MedicalRecords /> },
-            { path: "/medical-records/:id", element: <MedicalRecord /> },
+            { path: "/medical-records/:id", element: <MedicalRecordInfo /> },
         ],
     },
 ]);
 
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <RouterProvider router={router} />
+    <Provider store={store}>
+        <RouterProvider router={router} />
+    </Provider>
 );

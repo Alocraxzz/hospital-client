@@ -1,10 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { AppointmentService } from "../../../api/AppointmentService";
 import { IAppointment } from "../../../types/IAppointment";
+import { CustomModal } from "../../customModal/CustomModal";
 import { Table, Tbody, Thead } from "../Table";
 
 interface IAppointmentProps {
     appointments: IAppointment[];
+    handleUpdate: (() => void) | undefined;
 }
 
 const fields = [
@@ -16,7 +19,15 @@ const fields = [
     { name: "Actions" },
 ];
 
-export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
+export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments, handleUpdate }) => {
+    const handleModalConfirm = (id: number | undefined) => {
+        const deletePatient = async () => {
+            id && await AppointmentService.delete(id);
+        };
+        deletePatient();
+        // handleUpdate();
+    };
+
     return (
         <Table>
             <Thead>
@@ -47,11 +58,13 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
                                             Edit
                                         </button>
                                     </Link>
-                                    <Link to={`/appointments/${appointment.id}`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
-                                            Delete
-                                        </button>
-                                    </Link>
+                                    <CustomModal
+                                        title="Delete appointment?"
+                                        content={`Are you sure you want to delete the appointment with ID: ${appointment.id}?`}
+                                        openButtonTitle="Delete"
+                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        onConfirm={() => handleModalConfirm(appointment.id)}
+                                    />
                                 </div>
                             </td>
                         </tr>

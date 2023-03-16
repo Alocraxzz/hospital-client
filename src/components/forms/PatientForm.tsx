@@ -1,0 +1,100 @@
+import React, { useEffect, useState } from "react";
+import { IPatient } from "../../types/IPatient";
+import { phoneNumberFormatter } from "../../utils/phoneNumberFormatter";
+import { Button } from "../ui/Button";
+
+type PatientCreateFormProps = {
+    initialValue?: IPatient;
+    onSubmit: (patient: IPatient) => void;
+};
+
+export const PatientCreateForm: React.FC<PatientCreateFormProps> = ({ initialValue, onSubmit }) => {
+    const [patient, setPatient] = useState({
+        name: "", surname: "", dateOfBirth: "", phoneNumber: "",
+    });
+
+    useEffect(() => {
+        if (initialValue) {
+            setPatient({
+                name: initialValue.name || "",
+                surname: initialValue.surname || "",
+                dateOfBirth: initialValue.dateOfBirth?.toString() || "",
+                phoneNumber: initialValue.phoneNumber || "",
+            });
+        }
+    }, [initialValue]);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        onSubmit({
+            name: patient.name,
+            surname: patient.surname,
+            dateOfBirth: new Date(patient.dateOfBirth),
+            phoneNumber: patient.phoneNumber,
+        });
+    };
+
+    const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPatient({ ...patient, phoneNumber: phoneNumberFormatter(e.target.value) });
+    };
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+                <label htmlFor="name" className="block text-gray-300 font-bold mb-2">
+                    Name
+                </label>
+                <input
+                    id="name"
+                    type="text"
+                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    value={patient.name}
+                    onChange={(e) => setPatient({ ...patient, name: e.target.value })}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="surname" className="block text-gray-300 font-bold mb-2">
+                    Surname
+                </label>
+                <input
+                    id="surname"
+                    type="text"
+                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    value={patient.surname}
+                    onChange={(e) => setPatient({ ...patient, surname: e.target.value })}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="dateOfBirth" className="block text-gray-300 font-bold mb-2">
+                    Date of Birth
+                </label>
+                <input
+                    id="dateOfBirth"
+                    type="date"
+                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    value={patient.dateOfBirth}
+                    onChange={(e) => setPatient({ ...patient, dateOfBirth: e.target.value })}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="phone" className="block text-gray-300 font-bold mb-2">
+                    Phone Number
+                </label>
+                <input
+                    id="phone"
+                    type="tel"
+                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    value={patient.phoneNumber}
+                    onChange={handlePhoneNumberChange}
+                    placeholder="(123) 456-7890"
+                    required
+                />
+            </div>
+            <Button type="submit">Submit</Button>
+        </form>
+    );
+};

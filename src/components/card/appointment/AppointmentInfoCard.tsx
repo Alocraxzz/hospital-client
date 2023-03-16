@@ -32,7 +32,7 @@ export const AppointmentInfoCard: React.FC<AppointmentInfoCardProps> = ({ appoin
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-1/2">
                             <p className="text-gray-400">
-                                Date: <span className="font-semibold text-white">{date?.toLocaleString()}</span>
+                                Date: <span className="font-semibold text-white">{date?.toString()}</span>
                             </p>
                             <p className="text-gray-400">
                                 Reason: <span className="font-semibold text-white">{reason}</span>

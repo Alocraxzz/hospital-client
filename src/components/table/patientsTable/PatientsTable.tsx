@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { PatientService } from "../../../api/PatientService";
 import { IPatient } from "../../../types/IPatient";
-import { CustomModal } from "../../customModal/CustomModal";
 import { Table, Tbody, Thead } from "../Table";
+import { CustomModal } from "../../customModal/CustomModal";
 
 interface IPatientsTableProps {
     patients: IPatient[];
@@ -17,21 +17,24 @@ const fields = [
     { name: "Date of birth", key: "dateOfBirth" },
     { name: "Phone number", key: "phoneNumber" },
     { name: "Actions", key: "actions" },
-]
+];
 
 export const PatientsTable: FC<IPatientsTableProps> = ({ patients, handleUpdate }) => {
 
     const handleModalConfirm = (id: number | undefined) => {
-        id && PatientService.delete(id);
+        const deletePatient = async () => {
+            id && PatientService.delete(id);
+        };
+        deletePatient();
         handleUpdate();
-    }
+    };
 
     return (
         <Table>
             <Thead>
                 <tr className="whitespace-nowrap">
                     {fields.map((field) =>
-                        <th key={field.key} className="p-3 text-md tracking-wider text-left">{field.name}</th>
+                        <th key={field.key} className="p-3 text-md tracking-wider text-left">{field.name}</th>,
                     )}
                 </tr>
             </Thead>
@@ -47,7 +50,8 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients, handleUpdate 
                             <td className="p-3">
                                 <div className="inline-flex">
                                     <Link to={`/patients/${patient.id}`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                        <button
+                                            className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>

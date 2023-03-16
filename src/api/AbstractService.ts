@@ -1,3 +1,3 @@
 export abstract class Service {
-    protected static base = 'http://192.168.31.119:5000/api';
+    protected static base = 'http://localhost:5000/api';
 }

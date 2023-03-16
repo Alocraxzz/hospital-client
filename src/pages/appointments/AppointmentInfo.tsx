@@ -4,7 +4,7 @@ import { AppointmentService } from "../../api/AppointmentService";
 import { AppointmentInfoCard } from "../../components/card/appointment/AppointmentInfoCard";
 import { IAppointment } from "../../types/IAppointment";
 
-export const Appointment = () => {
+export const AppointmentInfo = () => {
     const { id } = useParams<{ id: string }>();
     const [appointment, setAppointment] = useState<IAppointment | null>(null);
 

@@ -4,7 +4,7 @@ import { MedicalRecordService } from "../../api/MedicalRecordService";
 import { MedicalRecordInfoCard } from "../../components/card/medicalRecord/MedicalRecordsInfoCard";
 import { IMedicalRecord } from "../../types/IMedicalRecord";
 
-export const MedicalRecord = () => {
+export const MedicalRecordInfo = () => {
     const { id } = useParams<{ id: string }>();
     const [medicalRecord, setMedicalRecord] = useState<IMedicalRecord | null>(null);
 
