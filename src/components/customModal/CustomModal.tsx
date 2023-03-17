@@ -35,12 +35,14 @@ export const CustomModal: FC<CustomModalProps> = ({ title, content, openButtonTi
                     <button
                         className="bg-slate-700 hover:bg-slate-600 font-bold text-white py-2 px-4 rounded"
                         onClick={() => setIsOpen(false)}
+                        tabIndex={2}
                     >
                         Close Modal
                     </button>
                     <button
                         className="bg-slate-700 hover:bg-slate-600 font-bold text-white py-2 px-4 ml-4 rounded"
                         onClick={handleOnConfirm}
+                        tabIndex={1}
                     >
                         Confirm
                     </button>

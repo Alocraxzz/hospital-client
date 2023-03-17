@@ -3,19 +3,11 @@ import { useParams } from "react-router-dom";
 import { MedicalRecordService } from "../../api/MedicalRecordService";
 import { MedicalRecordInfoCard } from "../../components/card/medicalRecord/MedicalRecordsInfoCard";
 import { IMedicalRecord } from "../../types/IMedicalRecord";
+import { medicalRecordApi } from "../../features/rtk-query/services/MedicalRecordService";
 
 export const MedicalRecordInfo = () => {
     const { id } = useParams<{ id: string }>();
-    const [medicalRecord, setMedicalRecord] = useState<IMedicalRecord | null>(null);
-
-    useEffect(() => {
-        const fetchMedicalRecord = async () => {
-            const medicalRecord = await MedicalRecordService.getOne(Number(id));
-
-            medicalRecord && setMedicalRecord(medicalRecord);
-        }
-        fetchMedicalRecord();
-    }, []);
+    const { data: medicalRecord, isLoading: isFetching } = medicalRecordApi.useFetchMedicalRecordByIdQuery(Number(id));
 
     return (
         <div>

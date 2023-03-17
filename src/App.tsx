@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import React from "react";
+import { patientApi } from "./features/rtk-query/services/PatientService";
+import { IPatient } from "./types/IPatient";
+import { useNavigate } from "react-router-dom";
+import { Button } from "./components/ui/Button";
+import { PatientInfoCard } from "./components/card/patient/PatientInfoCard";
 
 const App: React.FC = () => {
     // const [isOpen, setIsOpen] = useState(false);
 
+    const { data, error, isLoading } = patientApi.useFetchAllPatientsQuery(-1);
+    const [storePatient] = patientApi.useStorePatientMutation();
+
+
+    const handleStorePatient = () => {
+        storePatient({
+            "name": "Added",
+            "surname": "Last name",
+            "dateOfBirth": new Date("2021-05-18"),
+            "phoneNumber": "+380639874565",
+        })
+    }
+
     return (
-        // <div className="flex flex-col items-center justify-center">
-        //     <h1 className="text-3xl font-bold mb-6">Modal test!</h1>
-        //     <button
-        //         className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded"
-        //         onClick={() => setIsOpen(true)}
-        //     >
-        //         Open Modal
-        //     </button>
-        //     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        //         <h2 className="text-2xl text-white font-bold mb-4">Modal Title</h2>
-        //         <p className="mb-4 text-white">
-        //             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-        //             facilisi. Sed lacinia blandit velit, in luctus felis placerat at.
-        //         </p>
-        //         <div className="flex justify-end">
-        //             <button
-        //                 className="bg-slate-700 hover:bg-slate-600 font-bold text-white py-2 px-4 rounded"
-        //                 onClick={() => setIsOpen(false)}
-        //             >
-        //                 Close Modal
-        //             </button>
-        //             <button
-        //                 className="bg-slate-700 hover:bg-slate-600 font-bold text-white py-2 px-4 ml-4 rounded"
-        //                 onClick={() => alert('Confirmed')}
-        //             >
-        //                 Confirm
-        //             </button>
-        //         </div>
-        //     </Modal>
-        // </div>
+        <>
+            {isLoading ? (
+                <>Loading</>
+            ) : (
+                data?.map((elem: IPatient) => (
+                    <div key={elem?.id}>
+                        <PatientInfoCard patient={elem} />
+                    </div>
+                ))
+            )}
+            <br/>
+            <Button onClick={handleStorePatient}>Add patient</Button>
+        </>
     );
 };
 

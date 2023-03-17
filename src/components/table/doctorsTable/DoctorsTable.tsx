@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { DoctorService } from "../../../api/DoctorService";
 import { IDoctor } from "../../../types/IDoctor";
 import { Table, Tbody, Thead } from "../Table";
 import { CustomModal } from "../../customModal/CustomModal";
+import { doctorApi } from "../../../features/rtk-query/services/DoctorService";
 
 interface IDoctorsTableProps {
-    doctors: IDoctor[];
-    handleUpdate: () => void;
+    doctors: IDoctor[] | undefined;
 }
 
 const fields = [
@@ -19,12 +18,20 @@ const fields = [
     { name: "Actions", key: "actions" },
 ];
 
-export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors, handleUpdate }) => {
+export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors }) => {
+    const [deleteDoctor, { isLoading }] = doctorApi.useDeleteDoctorMutation();
 
     const handleModalConfirm = (id: number | undefined) => {
-        id && DoctorService.delete(id);
-        handleUpdate();
+        id && deleteDoctor(id);
     };
+
+    if (isLoading) {
+        return (
+            <>
+                Loading
+            </>
+        );
+    }
 
     return (
         <Table>
@@ -36,7 +43,7 @@ export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors, handleUpdate }) 
                 </tr>
             </Thead>
             <Tbody>
-                {doctors.length > 0 ? (
+                {doctors && doctors.length > 0 ? (
                     doctors.map((doctor) => (
                         <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={doctor.id}>
                             <td className="p-3 text-md">{doctor.id}</td>

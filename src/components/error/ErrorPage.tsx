@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouteError } from "react-router-dom";
 
 interface ErrorPageProps { }

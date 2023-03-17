@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AppointmentService } from "../../api/AppointmentService";
 import { AppointmentInfoCard } from "../../components/card/appointment/AppointmentInfoCard";
-import { IAppointment } from "../../types/IAppointment";
+import { appointmentApi } from "../../features/rtk-query/services/AppointmentService";
 
 export const AppointmentInfo = () => {
     const { id } = useParams<{ id: string }>();
-    const [appointment, setAppointment] = useState<IAppointment | null>(null);
-
-    useEffect(() => {
-        const fetchAppointment = async () => {
-            const appointment = await AppointmentService.getOne(Number(id));
-
-            appointment && setAppointment(appointment);
-        }
-        fetchAppointment();
-    }, []);
+    const { data: appointment, isLoading: isFetching } = appointmentApi.useFetchAppointmentByIdQuery(Number(id));
 
     return (
         <div>
             {appointment ? (
-                <AppointmentInfoCard appointment={appointment} />
+                <AppointmentInfoCard appointment={appointment}/>
             ) : (
                 <>Nothing was found</>
             )}

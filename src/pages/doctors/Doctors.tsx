@@ -1,32 +1,28 @@
-import { useEffect, useState } from "react";
-import { DoctorService } from "../../api/DoctorService";
+import React, { useEffect, useState } from "react";
 import { Header } from "../../components/ui/Header";
-import { IDoctor } from "../../types/IDoctor";
 import { DoctorsTable } from "../../components/table/doctorsTable/DoctorsTable";
+import { doctorApi } from "../../features/rtk-query/services/DoctorService";
+import { Link } from "react-router-dom";
+import { Button } from "../../components/ui/Button";
 
 export const Doctors = () => {
-    const [doctors, setDoctors] = useState<IDoctor[]>([]);
-    const [search, setSearch]                 = useState<string>("");
-    const [updateRequired, setUpdateRequired] = useState<boolean>(false);
+    const [search, setSearch]        = useState<string>("");
+    const { data, error, isLoading } = doctorApi.useFetchAllDoctorsQuery(-1);
 
     useEffect(() => {
-        const fetchDoctors = async () => {
-            const doctors = await DoctorService.getAll();
-
-            doctors && setDoctors(doctors);
-        };
-        fetchDoctors();
-    }, [updateRequired]);
-
-    const handleUpdate = () => {
-        setUpdateRequired(!updateRequired);
-    };
+        error && console.log(error);
+    }, [error]);
 
     return (
         <div>
-            <Header>Doctors</Header>
+            <div className="flex justify-between">
+                <Header>Doctors</Header>
+                <Link to="/doctors/create">
+                    <Button>Create</Button>
+                </Link>
+            </div>
 
-            <DoctorsTable doctors={doctors} handleUpdate={handleUpdate}/>
+            <DoctorsTable doctors={data}/>
         </div>
     );
 };

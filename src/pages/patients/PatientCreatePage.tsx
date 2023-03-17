@@ -1,27 +1,24 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { PatientService } from '../../api/PatientService';
-import { PatientCreateForm } from '../../components/forms/PatientForm';
+import { PatientForm } from '../../components/forms/PatientForm';
 import { IPatient } from '../../types/IPatient';
+import { patientApi } from "../../features/rtk-query/services/PatientService";
 
 export const PatientCreatePage: React.FC = () => {
+    const [storePatient, { isLoading }] = patientApi.useStorePatientMutation();
     const navigate = useNavigate();
     
     const handleFormSubmit = (patient: IPatient) => {
-        const createPatient = async () => {
-            if (patient) {
-                await PatientService.create(patient);
-            }
-        }
-        createPatient();
+        storePatient(patient);
 
-        return navigate("/patients");
+        !isLoading && navigate("/patients");
     };
 
     return (
         <div className="max-w-lg mx-auto my-8">
             <h1 className="text-3xl font-bold mb-4">Create Patient</h1>
-            <PatientCreateForm onSubmit={handleFormSubmit} />
+            <PatientForm onSubmit={handleFormSubmit} />
         </div>
     );
 };

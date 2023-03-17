@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PatientService } from "../../../api/PatientService";
 import { IPatient } from "../../../types/IPatient";
 import { Table, Tbody, Thead } from "../Table";
 import { CustomModal } from "../../customModal/CustomModal";
+import { patientApi } from "../../../features/rtk-query/services/PatientService";
 
 interface IPatientsTableProps {
-    patients: IPatient[];
-    handleUpdate: () => void;
+    patients: IPatient[] | undefined;
 }
 
 const fields = [
@@ -19,15 +19,20 @@ const fields = [
     { name: "Actions", key: "actions" },
 ];
 
-export const PatientsTable: FC<IPatientsTableProps> = ({ patients, handleUpdate }) => {
+export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
+    const [deletePatient, { isLoading }] = patientApi.useDeletePatientMutation();
 
     const handleModalConfirm = (id: number | undefined) => {
-        const deletePatient = async () => {
-            id && PatientService.delete(id);
-        };
-        deletePatient();
-        handleUpdate();
+        id && deletePatient(id);
     };
+
+    if (isLoading) {
+        return (
+            <>
+                Loading
+            </>
+        );
+    }
 
     return (
         <Table>
@@ -39,8 +44,8 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients, handleUpdate 
                 </tr>
             </Thead>
             <Tbody>
-                {patients.length > 0 ? (
-                    patients.map((patient) => (
+                {patients && patients?.length > 0 ? (
+                    patients?.map((patient) => (
                         <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={patient.id}>
                             <td className="p-3 text-md">{patient.id}</td>
                             <td className="p-3 text-md">{patient.name}</td>

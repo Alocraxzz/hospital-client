@@ -1,13 +1,14 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { AppointmentService } from "../../../api/AppointmentService";
 import { IAppointment } from "../../../types/IAppointment";
 import { CustomModal } from "../../customModal/CustomModal";
 import { Table, Tbody, Thead } from "../Table";
+import { doctorApi } from "../../../features/rtk-query/services/DoctorService";
+import { appointmentApi } from "../../../features/rtk-query/services/AppointmentService";
 
 interface IAppointmentProps {
-    appointments: IAppointment[];
-    handleUpdate: (() => void) | undefined;
+    appointments: IAppointment[] | undefined;
 }
 
 const fields = [
@@ -19,14 +20,20 @@ const fields = [
     { name: "Actions" },
 ];
 
-export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments, handleUpdate }) => {
+export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
+    const [deleteAppointment, { isLoading }] = appointmentApi.useDeleteAppointmentMutation();
+
     const handleModalConfirm = (id: number | undefined) => {
-        const deletePatient = async () => {
-            id && await AppointmentService.delete(id);
-        };
-        deletePatient();
-        // handleUpdate();
+        id && deleteAppointment(id);
     };
+
+    if (isLoading) {
+        return (
+            <>
+                Loading
+            </>
+        );
+    }
 
     return (
         <Table>
@@ -38,7 +45,7 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments, handleU
                 </tr>
             </Thead>
             <Tbody>
-                {appointments.length > 0 ? (
+                {appointments && appointments.length > 0 ? (
                     appointments.map((appointment) => (
                         <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={appointment.id}>
                             <td className="p-3 text-md">{appointment.id}</td>
@@ -53,7 +60,7 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments, handleU
                                             View
                                         </button>
                                     </Link>
-                                    <Link to={`/appointments/${appointment.id}`}>
+                                    <Link to={`/appointments/${appointment.id}/edit`}>
                                         <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
                                             Edit
                                         </button>

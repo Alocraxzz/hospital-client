@@ -1,11 +1,13 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { IMedicalRecord } from "../../../types/IMedicalRecord";
 import { Table, Tbody, Thead } from "../Table";
+import { patientApi } from "../../../features/rtk-query/services/PatientService";
+import { medicalRecordApi } from "../../../features/rtk-query/services/MedicalRecordService";
+import { CustomModal } from "../../customModal/CustomModal";
 
 interface MedicalRecordsProps {
-    medicalRecords: IMedicalRecord[];
-    handleUpdate: () => void | undefined;
+    medicalRecords: IMedicalRecord[] | undefined;
 }
 
 const fields = [
@@ -18,7 +20,21 @@ const fields = [
     { name: "Actions", key: "actions" },
 ]
 
-export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords, handleUpdate }) => {
+export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords }) => {
+    const [deleteMedicalRecord, { isLoading }] = medicalRecordApi.useDeleteMedicalRecordMutation();
+
+    const handleModalConfirm = (id: number | undefined) => {
+        id && deleteMedicalRecord(id);
+    };
+
+    if (isLoading) {
+        return (
+            <>
+                Loading
+            </>
+        );
+    }
+
     return (
         <Table>
             <Thead>
@@ -29,7 +45,7 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords, h
                 </tr>
             </Thead>
             <Tbody>
-                {medicalRecords.length > 0 ? (
+                {medicalRecords && medicalRecords.length > 0 ? (
                     medicalRecords.map((medicalRecord) => (
                         <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={medicalRecord.id}>
                             <td className="p-3 text-md">{medicalRecord.id}</td>
@@ -50,11 +66,13 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords, h
                                             Edit
                                         </button>
                                     </Link>
-                                    <Link to={`/medical-records/${medicalRecord.id}/delete`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r">
-                                            Delete
-                                        </button>
-                                    </Link>
+                                    <CustomModal
+                                        title="Delete medical record?"
+                                        content={`Are you sure you want to delete the medical record with ID: ${medicalRecord.id}?`}
+                                        openButtonTitle="Delete"
+                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        onConfirm={() => handleModalConfirm(medicalRecord.id)}
+                                    />
                                 </div>
                             </td>
                         </tr>

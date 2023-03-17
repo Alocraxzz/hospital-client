@@ -1,47 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { IPatient } from "../../types/IPatient";
+import { IDoctor } from "../../types/IDoctor";
 import { phoneNumberFormatter } from "../../utils/phoneNumberFormatter";
 import { Button } from "../ui/Button";
-import { patientApi } from "../../features/rtk-query/services/PatientService";
+import { doctorApi } from "../../features/rtk-query/services/DoctorService";
 
-type PatientCreateFormProps = {
-    initialPatientId?: number | undefined;
-    onSubmit: (patient: IPatient) => void;
+type DoctorCreateFormProps = {
+    initialValue?: IDoctor | undefined;
+    onSubmit: (doctor: IDoctor) => void;
 };
 
-interface PatientFormAttrs {
+interface DoctorFormAttrs {
     name: string;
     surname: string;
-    dateOfBirth: string;
+    speciality: string;
     phoneNumber: string;
 }
 
-export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId, onSubmit }) => {
-    const { data: initialPatient, isLoading, isError } = patientApi.useFetchPatientByIdQuery(Number(initialPatientId));
-    const [patient, setPatient] = useState({} as PatientFormAttrs);
+export const DoctorForm: React.FC<DoctorCreateFormProps> = ({ initialValue, onSubmit }) => {
+    const [doctor, setDoctor] = useState({
+        name: "", surname: "", speciality: "", phoneNumber: "",
+    } as DoctorFormAttrs);
 
     useEffect(() => {
-        if (initialPatient) {
-            setPatient({
-                name: initialPatient.name || "",
-                surname: initialPatient.surname || "",
-                dateOfBirth: initialPatient.dateOfBirth?.toString() || "",
-                phoneNumber: initialPatient.phoneNumber || "",
+        if (initialValue) {
+            setDoctor({
+                name: initialValue.name || "",
+                surname: initialValue.surname || "",
+                speciality: initialValue.speciality?.toString() || "",
+                phoneNumber: initialValue.phoneNumber || "",
             });
         }
-    }, [initialPatient]);
+    }, [initialValue]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        onSubmit({
-            name: patient.name,
-            surname: patient.surname,
-            dateOfBirth: new Date(patient.dateOfBirth),
-            phoneNumber: patient.phoneNumber,
-        });
+        if (doctor) {
+            onSubmit({
+                name: doctor.name,
+                surname: doctor.surname,
+                speciality: doctor.speciality,
+                phoneNumber: doctor.phoneNumber,
+            });
+        }
     };
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPatient({ ...patient, phoneNumber: phoneNumberFormatter(e.target.value) });
+        setDoctor({ ...doctor, phoneNumber: phoneNumberFormatter(e.target.value) });
     };
 
     return (
@@ -54,8 +57,8 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                     id="name"
                     type="text"
                     className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
-                    value={patient.name}
-                    onChange={(e) => setPatient({ ...patient, name: e.target.value })}
+                    value={doctor.name}
+                    onChange={(e) => setDoctor({ ...doctor, name: e.target.value })}
                     required
                 />
             </div>
@@ -67,21 +70,21 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                     id="surname"
                     type="text"
                     className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
-                    value={patient.surname}
-                    onChange={(e) => setPatient({ ...patient, surname: e.target.value })}
+                    value={doctor.surname}
+                    onChange={(e) => setDoctor({ ...doctor, surname: e.target.value })}
                     required
                 />
             </div>
             <div>
-                <label htmlFor="dateOfBirth" className="block text-gray-300 font-bold mb-2">
-                    Date of Birth
+                <label htmlFor="speciality" className="block text-gray-300 font-bold mb-2">
+                    Speciality
                 </label>
                 <input
-                    id="dateOfBirth"
-                    type="date"
+                    id="speciality"
+                    type="text"
                     className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
-                    value={patient.dateOfBirth}
-                    onChange={(e) => setPatient({ ...patient, dateOfBirth: e.target.value })}
+                    value={doctor.speciality}
+                    onChange={(e) => setDoctor({ ...doctor, speciality: e.target.value })}
                     required
                 />
             </div>
@@ -93,7 +96,7 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                     id="phone"
                     type="tel"
                     className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
-                    value={patient.phoneNumber}
+                    value={doctor.phoneNumber}
                     onChange={handlePhoneNumberChange}
                     placeholder="(123) 456-7890"
                     required

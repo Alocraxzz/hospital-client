@@ -6,24 +6,11 @@ import { Table, Tbody, Thead } from "../../components/table/Table";
 import { Button } from "../../components/ui/Button";
 import { Header } from "../../components/ui/Header";
 import { IAppointment } from "../../types/IAppointment";
+import { appointmentApi } from "../../features/rtk-query/services/AppointmentService";
 
 export const Appointments = () => {
-    const [appointments, setAppointments] = useState<IAppointment[]>([]);
     const [search, setSearch] = useState<string>("");
-    const [updateRequired, setUpdateRequired] = useState<boolean>(false);
-
-    useEffect(() => {
-        const fetchAppointments = async () => {
-            const appointments = await AppointmentService.getAll();
-
-            appointments && setAppointments(appointments);
-        }
-        fetchAppointments();
-    }, [updateRequired]);
-
-    const handleUpdate = () => {
-        setUpdateRequired(!updateRequired);
-    };
+    const { data: appointments, isLoading } = appointmentApi.useFetchAllAppointmentsQuery(-1);
 
     return (
         <div>
@@ -34,8 +21,7 @@ export const Appointments = () => {
                 </Link>
             </div>
 
-
-            <AppointmentsTable appointments={appointments} handleUpdate={handleUpdate} />
+            <AppointmentsTable appointments={appointments}  />
         </div>
     );
 };

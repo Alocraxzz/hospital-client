@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IDoctor } from "../../../types/IDoctor";
 import { AppointmentsTable } from "../../table/appointmentsTable/AppointmentsTable";
 import { MedicalRecordsTable } from "../../table/medicalRecordsTable/MedicalRecordsTable";
@@ -9,9 +9,17 @@ interface DoctorInfoCardProps {
     printAdditionalTables?: boolean;
 }
 
-export const DoctorInfoCard: React.FC<DoctorInfoCardProps> = ({ doctor, printAdditionalTables }) => {
-    const { id, name, surname, speciality, phoneNumber } = doctor;
-
+export const DoctorInfoCard: React.FC<DoctorInfoCardProps> = ({
+    doctor: {
+        name,
+        surname,
+        phoneNumber,
+        speciality,
+        appointments,
+        medicalRecords,
+    },
+    printAdditionalTables,
+}) => {
     return (
         <div className="flex flex-col">
             <div className="text-lg bg-gray-800 shadow-md rounded-md p-6">
@@ -33,16 +41,16 @@ export const DoctorInfoCard: React.FC<DoctorInfoCardProps> = ({ doctor, printAdd
                 <div>
                     <div className="my-5">
                         <Header>Doctors appointments</Header>
-                        {doctor.appointments ? (
-                            <AppointmentsTable appointments={doctor.appointments} />
+                        {appointments ? (
+                            <AppointmentsTable appointments={appointments}/>
                         ) : (
                             <>Nothing was found</>
                         )}
                     </div>
                     <div className="my-5">
                         <Header>Doctors medical records</Header>
-                        {doctor.medicalRecords ? (
-                            <MedicalRecordsTable medicalRecords={doctor.medicalRecords} />
+                        {medicalRecords ? (
+                            <MedicalRecordsTable medicalRecords={medicalRecords}/>
                         ) : (
                             <>Nothing was found</>
                         )}

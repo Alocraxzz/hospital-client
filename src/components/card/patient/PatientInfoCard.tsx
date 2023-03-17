@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IPatient } from "../../../types/IPatient";
 import { AppointmentsTable } from "../../table/appointmentsTable/AppointmentsTable";
 import { MedicalRecordsTable } from "../../table/medicalRecordsTable/MedicalRecordsTable";
@@ -7,14 +7,21 @@ import { Header } from "../../ui/Header";
 interface PatientInfoCardProps {
     patient: IPatient;
     printAdditionalTables?: boolean;
-    handleUpdate?: () => void;
 }
 
-export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, printAdditionalTables, handleUpdate }) => {
-    const { id, name, surname, dateOfBirth, phoneNumber } = patient;
-
+export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({
+    patient: {
+        name,
+        surname,
+        dateOfBirth,
+        phoneNumber,
+        appointments,
+        medicalRecords,
+    },
+    printAdditionalTables,
+}) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-2">
             <div className="text-md bg-gray-800 shadow-md rounded-md p-6">
                 <h2 className="text-xl font-semibold mb-4 text-white">
                     {name} {surname}
@@ -37,16 +44,16 @@ export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({ patient, print
                 <div>
                     <div className="my-5">
                         <Header>Patient appointments</Header>
-                        {patient.appointments ? (
-                            <AppointmentsTable appointments={patient.appointments} handleUpdate={handleUpdate} />
+                        {appointments ? (
+                            <AppointmentsTable appointments={appointments} />
                         ) : (
                             <>Nothing was found</>
                         )}
                     </div>
                     <div className="my-5">
                         <Header>Patient medical records</Header>
-                        {patient.medicalRecords ? (
-                            <MedicalRecordsTable medicalRecords={patient.medicalRecords} handleUpdate={handleUpdate} />
+                        {medicalRecords ? (
+                            <MedicalRecordsTable medicalRecords={medicalRecords} />
                         ) : (
                             <>Nothing was found</>
                         )}
