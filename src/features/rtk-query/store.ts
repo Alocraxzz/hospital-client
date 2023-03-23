@@ -22,4 +22,4 @@ export const store = configureStore({
             .concat(medicalRecordApi.middleware)
 });
 
-// setupListeners(store.dispatch);
+setupListeners(store.dispatch);

@@ -22,8 +22,8 @@ export const DoctorInfoCard: React.FC<DoctorInfoCardProps> = ({
 }) => {
     return (
         <div className="flex flex-col">
-            <div className="text-lg bg-gray-800 shadow-md rounded-md p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-white">
+            <div className="text-md bg-gray-800 shadow-md rounded-md p-6">
+                <h2 className="text-xl font-semibold mb-4 text-white">
                     {name} {surname}
                 </h2>
                 <div className="flex flex-wrap">

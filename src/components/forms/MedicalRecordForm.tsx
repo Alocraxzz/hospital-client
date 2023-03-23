@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { IAppointment } from "../../types/IAppointment";
+import { IMedicalRecord } from "../../types/IMedicalRecord";
 import { IDoctor } from "../../types/IDoctor";
 import { IPatient } from "../../types/IPatient";
 import { Button } from "../ui/Button";
 
-interface IAppointmentFormProps {
-    initialValue?: IAppointment | undefined;
+interface IMedicalRecordFormProps {
+    initialValue?: IMedicalRecord | undefined;
     patients: IPatient[] | undefined;
     doctors: IDoctor[] | undefined;
-    onSubmit: (appointment: IAppointment) => void;
+    onSubmit: (medicalRecord: IMedicalRecord) => void;
 }
 
-interface IAppointmentFormAttrs {
+interface IMedicalRecordFormAttrs {
     patientId?: number;
     doctorId?: number;
     date?: string;
-    reason?: string;
+    diagnosis?: string;
+    prescription?: string;
 }
 
-export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue, patients, doctors, onSubmit }) => {
-    const [appointment, setAppointment] = useState({
-        patientId: undefined, doctorId: undefined, date: "", reason: "",
-    } as IAppointmentFormAttrs);
+export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialValue, patients, doctors, onSubmit }) => {
+    const [medicalRecord, setMedicalRecord] = useState({
+        patientId: undefined, doctorId: undefined, date: "", diagnosis: "", prescription: "",
+    } as IMedicalRecordFormAttrs);
 
     useEffect(() => {
         if (initialValue) {
-            setAppointment({
+            setMedicalRecord({
                 patientId: initialValue.patientId,
                 doctorId: initialValue.doctorId,
-                date: initialValue.date?.toLocaleString() || "",
-                reason: initialValue.reason || "",
+                date: initialValue.date?.toString() || "",
+                diagnosis: initialValue.diagnosis || "",
+                prescription: initialValue.prescription || "",
             });
         }
     }, [initialValue]);
@@ -37,12 +39,13 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (appointment) {
+        if (medicalRecord) {
             onSubmit({
-                patientId: appointment.patientId,
-                doctorId: appointment.doctorId,
-                date: new Date(appointment.date || ""),
-                reason: appointment.reason,
+                patientId: medicalRecord.patientId,
+                doctorId: medicalRecord.doctorId,
+                date: new Date(medicalRecord.date || ""),
+                diagnosis: medicalRecord.diagnosis || "",
+                prescription: medicalRecord.prescription || "",
             });
         }
     };
@@ -56,8 +59,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                     </label>
                     <select
                         id="patient"
-                        value={appointment.patientId}
-                        onChange={(event) => setAppointment({ ...appointment, patientId: Number(event.target.value) })}
+                        value={medicalRecord.patientId}
+                        onChange={(event) => setMedicalRecord({ ...medicalRecord, patientId: Number(event.target.value) })}
                         className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
@@ -75,8 +78,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                     </label>
                     <select
                         id="doctor"
-                        value={appointment.doctorId}
-                        onChange={(event) => setAppointment({ ...appointment, doctorId: Number(event.target.value) })}
+                        value={medicalRecord.doctorId}
+                        onChange={(event) => setMedicalRecord({ ...medicalRecord, doctorId: Number(event.target.value) })}
                         className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
@@ -95,20 +98,32 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                     <input
                         type="date"
                         id="date"
-                        value={appointment.date}
-                        onChange={(event) => setAppointment({ ...appointment, date: event.target.value })}
+                        value={medicalRecord.date}
+                        onChange={(event) => setMedicalRecord({ ...medicalRecord, date: event.target.value })}
                         className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
                         required
                     />
                 </div>
                 <div className="flex flex-wrap mb-6">
-                    <label htmlFor="reason" className="block text-gray-300 font-bold mb-2">
-                        Reason
+                    <label htmlFor="diagnosis" className="block text-gray-300 font-bold mb-2">
+                        Diagnosis
                     </label>
                     <textarea
-                        id="reason"
-                        value={appointment.reason}
-                        onChange={(event) => setAppointment({ ...appointment, reason: event.target.value })}
+                        id="diagnosis"
+                        value={medicalRecord.diagnosis}
+                        onChange={(event) => setMedicalRecord({ ...medicalRecord, diagnosis: event.target.value })}
+                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        required
+                    />
+                </div>
+                <div className="flex flex-wrap mb-6">
+                    <label htmlFor="prescription" className="block text-gray-300 font-bold mb-2">
+                        Prescription
+                    </label>
+                    <textarea
+                        id="prescription"
+                        value={medicalRecord.prescription}
+                        onChange={(event) => setMedicalRecord({ ...medicalRecord, prescription: event.target.value })}
                         className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
                         required
                     />

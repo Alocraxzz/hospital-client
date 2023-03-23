@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MedicalRecordService } from "../../api/MedicalRecordService";
 import { MedicalRecordInfoCard } from "../../components/card/medicalRecord/MedicalRecordsInfoCard";
-import { IMedicalRecord } from "../../types/IMedicalRecord";
 import { medicalRecordApi } from "../../features/rtk-query/services/MedicalRecordService";
 
 export const MedicalRecordInfo = () => {
@@ -12,7 +9,7 @@ export const MedicalRecordInfo = () => {
     return (
         <div>
             {medicalRecord ? (
-                <MedicalRecordInfoCard medicalRecord={medicalRecord} />
+                <MedicalRecordInfoCard medicalRecord={medicalRecord}/>
             ) : (
                 <>Nothing was found</>
             )}

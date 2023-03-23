@@ -21,6 +21,8 @@ import { DoctorCreatePage } from "./pages/doctors/DoctorCreatePage";
 import { DoctorEditPage } from "./pages/doctors/DoctorEditPage";
 import React from "react";
 import { AppointmentEditPage } from "./pages/appointments/AppointmentEditPage";
+import { MedicalRecordCreatePage } from "./pages/medicalRecords/MedicalRecordCreatePage";
+import { MedicalRecordEditPage } from "./pages/medicalRecords/MedicalRecordEditPage";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
 
             { path: "/medical-records", element: <MedicalRecords/> },
             { path: "/medical-records/:id", element: <MedicalRecordInfo/> },
+            { path: "/medical-records/create", element: <MedicalRecordCreatePage/> },
+            { path: "/medical-records/:id/edit", element: <MedicalRecordEditPage/> },
         ],
     },
 ]);

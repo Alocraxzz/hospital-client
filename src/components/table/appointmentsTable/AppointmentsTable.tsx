@@ -49,8 +49,8 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
                     appointments.map((appointment) => (
                         <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={appointment.id}>
                             <td className="p-3 text-md">{appointment.id}</td>
-                            <td className="p-3 text-md">{appointment.patientId}</td>
-                            <td className="p-3 text-md">{appointment.doctorId}</td>
+                            <td className="p-3 text-md">{appointment.patient?.name} {appointment.patient?.surname}</td>
+                            <td className="p-3 text-md">{appointment.doctorId} </td>
                             <td className="p-3 text-md">{appointment.date?.toLocaleString()}</td>
                             <td className="p-3 text-md whitespace-pre">{appointment.reason}</td>
                             <td className="p-3">

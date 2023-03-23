@@ -17,8 +17,10 @@ interface PatientFormAttrs {
 }
 
 export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId, onSubmit }) => {
-    const { data: initialPatient, isLoading, isError } = patientApi.useFetchPatientByIdQuery(Number(initialPatientId));
-    const [patient, setPatient] = useState({} as PatientFormAttrs);
+    const { data: initialPatient } = patientApi.useFetchPatientByIdQuery(Number(initialPatientId));
+    const [patient, setPatient] = useState({
+        name: "", surname: "", dateOfBirth: "", phoneNumber: "",
+    } as PatientFormAttrs);
 
     useEffect(() => {
         if (initialPatient) {
