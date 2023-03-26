@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PatientInfoCard } from "../../components/card/patient/PatientInfoCard";
 import { patientApi } from "../../features/rtk-query/services/PatientService";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { Fade } from "../../components/animations/Fade";
 
 export const PatientInfo = () => {
+    const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const { data: patient, isLoading, isError, refetch } = patientApi.useFetchPatientByIdQuery(Number(id));
 
@@ -11,14 +13,22 @@ export const PatientInfo = () => {
         refetch();
     }, [refetch]);
 
+    if (isError) {
+        navigate('/error', {
+            state: {
+                error: 'Fail to load patients'
+            }
+        });
+    }
+
     return (
         <div>
             {isLoading ? (
                 <div>Loading...</div>
-            ) : isError ? (
-                <div>Error!</div>
             ) : patient ? (
-                <PatientInfoCard patient={patient} printAdditionalTables={true}/>
+                <Fade>
+                    <PatientInfoCard patient={patient} printAdditionalTables={true}/>
+                </Fade>
             ) : (
                 <>Nothing was found</>
             )}

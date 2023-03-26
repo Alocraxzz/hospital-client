@@ -49,6 +49,8 @@ const router = createBrowserRouter([
             { path: "/medical-records/:id", element: <MedicalRecordInfo/> },
             { path: "/medical-records/create", element: <MedicalRecordCreatePage/> },
             { path: "/medical-records/:id/edit", element: <MedicalRecordEditPage/> },
+
+            { path: "/error", element: <ErrorPage/> },
         ],
     },
 ]);
