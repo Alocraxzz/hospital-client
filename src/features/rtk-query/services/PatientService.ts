@@ -19,6 +19,8 @@ export const patientApi = createApi({
             query: (id) => ({
                 url: `/patients/${id}`,
             }),
+            // @ts-ignore
+            refetchOnMount: true,
             providesTags: ["Patients"],
         }),
         storePatient: build.mutation<IPatient, Partial<IPatient>>({
