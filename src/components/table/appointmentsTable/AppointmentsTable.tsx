@@ -47,21 +47,25 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
             <Tbody>
                 {appointments && appointments.length > 0 ? (
                     appointments.map((appointment) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={appointment.id}>
+                        <tr className="bg-transparent whitespace-nowrap" key={appointment.id}>
                             <td className="p-3 text-md">{appointment.id}</td>
                             <td className="p-3 text-md">{appointment.patientId}</td>
                             <td className="p-3 text-md">{appointment.doctorId} </td>
                             <td className="p-3 text-md">{appointment.date?.toLocaleString()}</td>
-                            <td className="p-3 text-md whitespace-pre">{appointment.reason}</td>
+                            <td className="p-3 text-md whitespace-pre">{
+                                (appointment.reason && appointment.reason?.length > 45)
+                                    ? appointment.reason?.substring(0, 45) + "..."
+                                    : appointment.reason
+                            }</td>
                             <td className="p-3">
                                 <div className="inline-flex">
                                     <Link to={`/appointments/${appointment.id}`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
                                     <Link to={`/appointments/${appointment.id}/edit`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
@@ -69,7 +73,7 @@ export const AppointmentsTable: FC<IAppointmentProps> = ({ appointments }) => {
                                         title="Delete appointment?"
                                         content={`Are you sure you want to delete the appointment with ID: ${appointment.id}?`}
                                         openButtonTitle="Delete"
-                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        openButtonStyles="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-r"
                                         onConfirm={() => handleModalConfirm(appointment.id)}
                                     />
                                 </div>

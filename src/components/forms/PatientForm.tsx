@@ -55,7 +55,7 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                 <input
                     id="name"
                     type="text"
-                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
                     value={patient.name}
                     onChange={(e) => setPatient({ ...patient, name: e.target.value })}
                     required
@@ -68,7 +68,7 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                 <input
                     id="surname"
                     type="text"
-                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
                     value={patient.surname}
                     onChange={(e) => setPatient({ ...patient, surname: e.target.value })}
                     required
@@ -81,7 +81,7 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                 <input
                     id="dateOfBirth"
                     type="date"
-                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
                     value={patient.dateOfBirth}
                     onChange={(e) => setPatient({ ...patient, dateOfBirth: e.target.value })}
                     required
@@ -94,7 +94,7 @@ export const PatientForm: React.FC<PatientCreateFormProps> = ({ initialPatientId
                 <input
                     id="phone"
                     type="tel"
-                    className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                    className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
                     value={patient.phoneNumber}
                     onChange={handlePhoneNumberChange}
                     placeholder="(123) 456-7890"

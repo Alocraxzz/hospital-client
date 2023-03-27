@@ -61,7 +61,7 @@ export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialVa
                         id="patient"
                         value={medicalRecord.patientId}
                         onChange={(event) => setMedicalRecord({ ...medicalRecord, patientId: Number(event.target.value) })}
-                        className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
+                        className="bg-transparent border border-slate-800 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
                         <option value="">Select a patient</option>
@@ -80,7 +80,7 @@ export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialVa
                         id="doctor"
                         value={medicalRecord.doctorId}
                         onChange={(event) => setMedicalRecord({ ...medicalRecord, doctorId: Number(event.target.value) })}
-                        className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
+                        className="bg-transparent border border-slate-800 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
                         <option value="">Select a doctor</option>
@@ -100,7 +100,7 @@ export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialVa
                         id="date"
                         value={medicalRecord.date}
                         onChange={(event) => setMedicalRecord({ ...medicalRecord, date: event.target.value })}
-                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        className="bg-transparent border border-slate-800 p-2 w-full rounded-lg"
                         required
                     />
                 </div>
@@ -112,7 +112,7 @@ export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialVa
                         id="diagnosis"
                         value={medicalRecord.diagnosis}
                         onChange={(event) => setMedicalRecord({ ...medicalRecord, diagnosis: event.target.value })}
-                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        className="bg-transparent border border-slate-800 p-2 w-full rounded-lg"
                         required
                     />
                 </div>
@@ -124,7 +124,8 @@ export const MedicalRecordForm: React.FC<IMedicalRecordFormProps> = ({ initialVa
                         id="prescription"
                         value={medicalRecord.prescription}
                         onChange={(event) => setMedicalRecord({ ...medicalRecord, prescription: event.target.value })}
-                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        className="bg-transparent border border-slate-800 p-2 w-full rounded-lg h-auto"
+                        style={{ height: "auto", minHeight: "10rem", maxHeight: "20rem" }}
                         required
                     />
                 </div>

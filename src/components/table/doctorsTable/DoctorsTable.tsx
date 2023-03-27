@@ -45,7 +45,7 @@ export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors }) => {
             <Tbody>
                 {doctors && doctors.length > 0 ? (
                     doctors.map((doctor) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={doctor.id}>
+                        <tr className="bg-transparent whitespace-nowrap" key={doctor.id}>
                             <td className="p-3 text-md">{doctor.id}</td>
                             <td className="p-3 text-md">{doctor.name}</td>
                             <td className="p-3 text-md">{doctor.surname}</td>
@@ -55,12 +55,12 @@ export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors }) => {
                                 <div className="inline-flex">
                                     <Link to={`/doctors/${doctor.id}`}>
                                         <button
-                                            className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                            className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
                                     <Link to={`/doctors/${doctor.id}/edit`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
@@ -68,7 +68,7 @@ export const DoctorsTable: FC<IDoctorsTableProps> = ({ doctors }) => {
                                         title="Delete doctor?"
                                         content={`Are you sure you want to delete the doctor with ID: ${doctor.id}?`}
                                         openButtonTitle="Delete"
-                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        openButtonStyles="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-r"
                                         onConfirm={() => handleModalConfirm(doctor.id)}
                                     />
                                 </div>

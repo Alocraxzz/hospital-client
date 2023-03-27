@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 
 interface TableProps {
     children: React.ReactNode;
@@ -7,7 +7,7 @@ interface TableProps {
 
 export const Thead: FC<TableProps> = ({ children }) => {
     return (
-        <thead className="bg-slate-800 border-b-2 border-slate-500">
+        <thead className="bg-transparent border-b border-slate-700">
             {children}
         </thead>
     );
@@ -15,7 +15,7 @@ export const Thead: FC<TableProps> = ({ children }) => {
 
 export const Tbody: FC<TableProps> = ({ children }) => {
     return (
-        <tbody className="divide-y divide-slate-500">
+        <tbody className="divide-y divide-slate-700">
             {children}
         </tbody>
     );
@@ -24,7 +24,7 @@ export const Tbody: FC<TableProps> = ({ children }) => {
 export const Table: FC<TableProps | any> = ({ children, ...props }) => {
     return (
         <div {...props}>
-            <div className="overflow-auto rounded-lg shadow">
+            <div className="overflow-auto border border-slate-700 shadow rounded-md pb-auto w-full">
                 <table className="w-full">
                     {children}
                 </table>

@@ -58,7 +58,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                         id="patient"
                         value={appointment.patientId}
                         onChange={(event) => setAppointment({ ...appointment, patientId: Number(event.target.value) })}
-                        className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
+                        className="bg-transparent border border-slate-800 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
                         <option value="">Select a patient</option>
@@ -77,7 +77,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                         id="doctor"
                         value={appointment.doctorId}
                         onChange={(event) => setAppointment({ ...appointment, doctorId: Number(event.target.value) })}
-                        className="bg-slate-700 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
+                        className="bg-transparent border border-slate-800 block appearance-none w-full py-2 px-3 rounded-lg leading-tight"
                         required
                     >
                         <option value="">Select a doctor</option>
@@ -97,7 +97,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                         id="date"
                         value={appointment.date}
                         onChange={(event) => setAppointment({ ...appointment, date: event.target.value })}
-                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
                         required
                     />
                 </div>
@@ -109,7 +109,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = ({ initialValue,
                         id="reason"
                         value={appointment.reason}
                         onChange={(event) => setAppointment({ ...appointment, reason: event.target.value })}
-                        className="bg-slate-700 border border-gray-700 p-2 w-full rounded-lg"
+                        className="bg-transparent border border-gray-700 p-2 w-full rounded-lg"
+                        style={{ height: "auto", minHeight: "10rem", maxHeight: "20rem" }}
                         required
                     />
                 </div>

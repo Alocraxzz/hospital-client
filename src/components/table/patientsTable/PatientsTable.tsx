@@ -46,7 +46,7 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
             <Tbody>
                 {patients && patients?.length > 0 ? (
                     patients?.map((patient) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={patient.id}>
+                        <tr className="whitespace-nowrap" key={patient.id}>
                             <td className="p-3 text-md">{patient.id}</td>
                             <td className="p-3 text-md">{patient.name}</td>
                             <td className="p-3 text-md">{patient.surname}</td>
@@ -56,12 +56,12 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
                                 <div className="inline-flex">
                                     <Link to={`/patients/${patient.id}`}>
                                         <button
-                                            className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                            className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
                                     <Link to={`/patients/${patient.id}/edit`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
@@ -69,7 +69,7 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
                                         title="Delete patient?"
                                         content={`Are you sure you want to delete the patient with ID: ${patient.id}?`}
                                         openButtonTitle="Delete"
-                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        openButtonStyles="bg-transparent border border-slate-700 hover:bg-slate-700 font-bold py-2 px-4 rounded-r"
                                         onConfirm={() => handleModalConfirm(patient.id)}
                                     />
                                 </div>
@@ -77,7 +77,7 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
                         </tr>
                     ))
                 ) : (
-                    <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap">
+                    <tr className="bg-transparent whitespace-nowrap">
                         <td className="text-center p-3 text-md" colSpan={fields.length}>
                             Nothing was found
                         </td>

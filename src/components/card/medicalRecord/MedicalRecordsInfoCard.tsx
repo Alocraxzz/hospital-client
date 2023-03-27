@@ -28,17 +28,17 @@ export const MedicalRecordInfoCard: React.FC<MedicalRecordInfoCardProps> = ({ me
                 <h2 className="text-xl font-semibold mb-4 text-white">
                     Medical record
                 </h2>
-                <div className="text-md bg-gray-800 shadow-md rounded-md p-6">
+                <div className="text-md bg-transparent border border-slate-700 shadow-md rounded-md p-4">
                     <div className="flex flex-wrap">
-                        <div className="w-full lg:w-1/2">
+                        <div className="w-full lg:w-3/4">
                             <p className="text-gray-400">
                                 Date: <span className="font-semibold text-white">{date?.toLocaleString()}</span>
                             </p>
                             <p className="text-gray-400">
-                                Diagnosis: <span className="font-semibold text-white">{diagnosis}</span>
+                                Diagnosis: <span className="font-semibold text-white break-all">{diagnosis}</span>
                             </p>
                             <p className="text-gray-400">
-                                Prescription: <span className="font-semibold text-white">{prescription}</span>
+                                Prescription: <span className="font-semibold text-white break-all">{prescription}</span>
                             </p>
                         </div>
                     </div>

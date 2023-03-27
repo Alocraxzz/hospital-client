@@ -43,7 +43,7 @@ const Modal: React.FC<Props> = ({ isOpen, onClose, children }) => {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className="inline-block max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-slate-800 shadow-xl rounded-2xl">
+                        <div className="inline-block max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-slate-900 shadow-xl rounded-2xl">
                             {children}
                         </div>
                     </Transition.Child>

@@ -17,7 +17,7 @@ export const patientApi = createApi({
         }),
         fetchPatientById: build.query<IPatient, number>({
             query: (id) => ({
-                url: `/patients1/${id}`,
+                url: `/patients/${id}`,
             }),
             providesTags: ["Patients"],
         }),

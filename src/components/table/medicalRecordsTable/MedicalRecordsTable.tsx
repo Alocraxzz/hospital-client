@@ -27,14 +27,6 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords })
         id && deleteMedicalRecord(id);
     };
 
-    if (isLoading) {
-        return (
-            <>
-                Loading
-            </>
-        );
-    }
-
     return (
         <Table>
             <Thead>
@@ -47,22 +39,26 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords })
             <Tbody>
                 {medicalRecords && medicalRecords.length > 0 ? (
                     medicalRecords.map((medicalRecord) => (
-                        <tr className="odd:bg-slate-800 even:bg-slate-800 whitespace-nowrap" key={medicalRecord.id}>
+                        <tr className="whitespace-nowrap" key={medicalRecord.id}>
                             <td className="p-3 text-md">{medicalRecord.id}</td>
                             <td className="p-3 text-md">{medicalRecord.patientId}</td>
                             <td className="p-3 text-md">{medicalRecord.doctorId}</td>
                             <td className="p-3 text-md">{medicalRecord.date?.toLocaleString()}</td>
                             <td className="p-3 text-md whitespace-pre">{medicalRecord.diagnosis}</td>
-                            <td className="p-3 text-md whitespace-pre">{medicalRecord.prescription}</td>
+                            <td className="p-3 text-md whitespace-pre">{
+                                (medicalRecord.prescription && medicalRecord.prescription?.length > 45)
+                                    ? medicalRecord.prescription?.substring(0, 45) + "..."
+                                    : medicalRecord.prescription
+                            }</td>
                             <td className="p-3">
                                 <div className="inline-flex">
                                     <Link to={`/medical-records/${medicalRecord.id}`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-l">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 py-2 px-4 rounded-l">
                                             View
                                         </button>
                                     </Link>
                                     <Link to={`/medical-records/${medicalRecord.id}/edit`}>
-                                        <button className="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4">
+                                        <button className="bg-transparent border border-slate-700 hover:bg-slate-700 py-2 px-4">
                                             Edit
                                         </button>
                                     </Link>
@@ -70,7 +66,7 @@ export const MedicalRecordsTable: FC<MedicalRecordsProps> = ({ medicalRecords })
                                         title="Delete medical record?"
                                         content={`Are you sure you want to delete the medical record with ID: ${medicalRecord.id}?`}
                                         openButtonTitle="Delete"
-                                        openButtonStyles="bg-slate-700 hover:bg-slate-600 font-bold py-2 px-4 rounded-r"
+                                        openButtonStyles="bg-transparent border border-slate-700 hover:bg-slate-700 py-2 px-4 rounded-r"
                                         onConfirm={() => handleModalConfirm(medicalRecord.id)}
                                     />
                                 </div>
