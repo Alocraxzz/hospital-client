@@ -5,8 +5,7 @@ import { Fade } from "../animations/Fade";
 
 export const Layout = () => {
     return (
-        <div className="h-full pb-5  text-slate-300 font-sans">
-            {/*bg-slate-900*/}
+        <div className="h-full pb-5 text-slate-300 font-sans">
             <div className="container mx-auto pb-5 mb-5">
                 <Fade>
                     <Navbar />

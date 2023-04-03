@@ -26,14 +26,6 @@ export const PatientsTable: FC<IPatientsTableProps> = ({ patients}) => {
         id && deletePatient(id);
     };
 
-    if (isLoading) {
-        return (
-            <>
-                Loading
-            </>
-        );
-    }
-
     return (
         <Table>
             <Thead>

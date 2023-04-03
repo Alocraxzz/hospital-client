@@ -24,11 +24,9 @@ export const Appointments = () => {
     if (error) {
         navigate('/error', {
             state: {
-                error: 'Fail to load patients info'
+                error: 'Fail to load appointments info'
             }
         });
-
-        console.log(error);
     }
 
     return (

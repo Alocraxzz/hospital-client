@@ -27,8 +27,6 @@ export const Patients = () => {
                 error: 'Fail to load patients info'
             }
         });
-
-        console.log(error);
     }
 
     return (
